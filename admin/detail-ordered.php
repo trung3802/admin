@@ -1,32 +1,4 @@
-<!-- <div style="margin-top: 80px;">
-    <a href="?act=order-items" class="btn btn-success">Quay lại</a>
-    <br>
-    <table class="table table-bordered " id="myTable"style="margin-top: 10px;" >
-        <thead class="">
-        <tr class="">
-            <th>Mã hàng 1</th>
-            <th>Tên sản phẩm</th>
-            <th>Ảnh</th>
-            <th>Giá</th>
-            <th>Ngày mua</th>
-            <th>Trạng thái</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        foreach ($order as $item){
-            echo '<tr>';
-            echo '<td style="text-align: center;">' . $item['danhmucname'] . '</td>';
-            echo '<td style="text-align: center;">' . $item['name'] . '</td>';
-            echo '<td style="text-align: center;"><img src=../upload/' . $item['img'] . ' alt="Hình ảnh sản phẩm" style="height: 19rem;text-align:center"></td>';
-            echo '<td style="text-align: center;">' . $item['price'] . '</td>';
-            echo '<td style="text-align: center;">' . $item['date'] . '</td>';
-            echo '<td style="text-align: center;">Đã mua</td>';
-            echo '</tr>';
-        }?>
-        </tbody>
-    </table>
-</div> -->
+
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -128,33 +100,55 @@ h2 {
         }
     </style>
 
-    <div class='order-info' style="margin-top: 80px;">
+<div class='order-info' style="margin-top: 80px;">
+    <?php foreach ($order as $item): ?>
         <div>
-            <h3>Thông Tin Đơn Hàng</h3></p><br>
-            <p><strong>Mã khách hàng: </strong></p><br>
-            <p><strong>Ngày Tạo: </strong></p><br>
-            <p><strong>Tổng tiền: </strong></p><br>
-            <p><strong>Số Lượng: </strong></p><br>
-            <select name="" id="">
-                <option value="null">Trạng thái</option>
-                <option value="">Đã thanh toán</option> 
-                <option value="">Chưa thanh toán</option>
-                <option value="">Chờ thanh toán</option>
-                
-              </select>
+            <h3>Thông Tin Đơn Hàng</h3>
+            <p><strong>Mã khách hàng: </strong><?php echo $item['user_id']; ?></p>
+            <p><strong>Ngày Tạo: </strong><?php echo $item['date']; ?></p>
+            <p><strong>Tổng tiền: </strong><?php echo $item['total_amount']; ?></p>       
+            <p><strong>Số Lượng: </strong><?php echo $item['quantity']; ?></p>
+            <p><strong>Trạng Thái: </strong>
+            <?php
+                switch ($item['trangthai']) {
+                    case 1:
+                        echo 'Đang chờ giao hàng';
+                        break;
+                    case 2:
+                        echo 'Đơn hàng đang giao';
+                        break;
+                    case 3:
+                        echo 'Hoàn thành';
+                        break;
+                    default:
+                        echo 'Không xác định';
+                }
+            ?>
+        </p>
+
+        <select name="" id="">
+            <option value="1" <?php echo ($item['trangthai'] == 1) ? 'selected' : ''; ?>>Đang chờ</option>
+            <option value="2" <?php echo ($item['trangthai'] == 2) ? 'selected' : ''; ?>>Đang giao</option>
+            <option value="3" <?php echo ($item['trangthai'] == 3) ? 'selected' : ''; ?>>Hoàn thành</option>
+        </select>
         </div>
         <div>
-            <h3>Chi Tiết Giỏ Hàng</h3></p><br>
-            <p><strong>Sản Phẩm: </strong></p><br>
-            <p><strong></strong><img src="admin/assets/img/products/" alt=''></p><br>
-            
+            <h3>Chi Tiết Giỏ Hàng</h3>
+            <p><strong>Sản Phẩm: </strong><?php echo $item['product_id']; ?></p>
+            <p><strong>Tên Sản Phẩm: </strong><?php echo $item['name']; ?></p>
+
+            <p><strong>Hình Ảnh<img src="../upload/<?php echo $item['img']; ?>" alt=''></strong></p>
+
         </div>
         <div>
-            <h3>Thông Tin Đặt Hàng </h3></p><br>
-            <p><strong>Người đặt hàng:</strong> ></p><br>
-            <p><strong>Địa chỉ:</strong></p><br>
-            <p><strong>Email:</strong> </p><br>
-            <p><strong>Số điện thoại:</strong> </p><br>
+            <h3>Thông Tin Đặt Hàng </h3>
+            <p><strong>Người đặt hàng:</strong><?php echo $item['name']; ?></p>
+            <p><strong>Địa chỉ:</strong><?php echo $item['address']; ?></p>
+            <p><strong>Email:</strong><?php echo $item['email']; ?></p>
+            <p><strong>Số điện thoại:</strong><?php echo $item['phone']; ?></p>
         </div>
-    </div>
-    <input type="submit" style="width: 10%; height: 80px; color:red; margin-left: 80%;" >
+    <?php endforeach; ?>
+</div>
+
+<input type="submit" style="width: 10%; height: 80px; color: red; margin-left: 80%;" value="Xác Nhận">
+

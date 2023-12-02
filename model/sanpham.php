@@ -97,16 +97,11 @@ GROUP BY oi.order_id, oi.name,oi.address,oi.phone;
 ";
     return pdo_query($sql);
 }
-function detail($id){
-    $sql ="SELECT oi.*, tk.`user`, sp.*, dm.`name` as danhmucname
-FROM order_items oi
-JOIN taikhoan tk ON oi.user_id = tk.id
-JOIN sanpham sp ON oi.product_id = sp.id
-JOIN danhmuc dm ON sp.iddm = dm.id
-WHERE oi.order_id = $id;
-";
-    return pdo_query($sql);
-}
+
+
+
+
+
 function getUnplaced(){
     $sql ="SELECT oi.user_id, SUM(oi.quantity * sp.price) AS total_amount
 FROM carts oi
@@ -181,6 +176,16 @@ function getDayAll(){
 function getDetail($day){
     $sql = "
     SELECT YEAR(oi.date) AS order_year, MONTH(oi.date) AS order_month, DAY(oi.date) as order_day, SUM(oi.quantity * sp.price) AS total_amount FROM order_items oi JOIN sanpham sp ON oi.product_id = sp.id where oi.date  = '$day' GROUP BY YEAR(oi.date), MONTH(oi.date), DAY(oi.date)
+";
+    return pdo_query($sql);
+}
+function detail($id){
+    $sql ="SELECT oi.*, tk.`user`,tk.`email`,sp.`img`, sp.*, dm.`name` as danhmucname,SUM(oi.quantity * sp.price) AS total_amount
+FROM order_items oi
+JOIN taikhoan tk ON oi.user_id = tk.id
+JOIN sanpham sp ON oi.product_id = sp.id
+JOIN danhmuc dm ON sp.iddm = dm.id
+WHERE oi.order_id = $id;
 ";
     return pdo_query($sql);
 }

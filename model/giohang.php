@@ -153,7 +153,7 @@ WHERE carts.user_id =  $idUser and carts.status = 0";
                 $product_id = $row['product_id'];
                 $quantity = $row['quantity'];
 
-                $sql = "INSERT INTO order_items (order_id, user_id, product_id, quantity,date) VALUES ($maxOrderId +1 , $userId, $product_id, $quantity,NOW())";
+                $sql = "INSERT INTO order_items (order_id, user_id, product_id, quantity,date,trangthai) VALUES ($maxOrderId +1 , $userId, $product_id, $quantity,NOW(),1)";
                 if ($conn->query($sql) !== TRUE) {
                     echo "Lỗi khi thêm dữ liệu: " . $conn->error;
                     die;

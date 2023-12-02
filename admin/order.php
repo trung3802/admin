@@ -6,7 +6,6 @@
         <tr class="">
             <th>Mã hàng</th>
             <th>Tổng giá</th>
-            <th>Trạng thái</th>
             <th>Tên</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
@@ -19,7 +18,6 @@
                echo '<tr>';
                echo '<td style="text-align: center;">' . $row['order_id'] . '</td>';
                echo '<td style="text-align: center;">' . $row['total_amount'] . '</td>';
-               echo '<td style="text-align: center;">Đã thanh toán</td>';
                echo '<td style="text-align: center;">' . $row['name'] . '</td>';
                echo '<td style="text-align: center;">' . $row['address'] . '</td>';
                echo '<td style="text-align: center;">' . $row['phone'] . '</td>';
