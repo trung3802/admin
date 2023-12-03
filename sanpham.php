@@ -487,29 +487,7 @@
 
             </div>
 
-            <div class="customer-reviews row pb-4 pb-4  py-4 pb-4 py-4 py-4">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <h3>Bình luận sản phẩm</h3>
-                    <form id="formgroupcomment" method="post">
-                        <!-- <div class="form-group">
-                            <label>Tên:</label>
-                            <input name="comm_name" required="" type="text" id='form-name' class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Email:</label>
-                            <input name="comm_mail" required="" type="email" class="form-control" id="pwd">
-                        </div> -->
-                        <input type="hidden" name="product_id" id="product_id" class="product_id"
-                            value="<?php echo $id ?>">
-                        <div class="form-group">
-                            <label>Nội dung:</label>
-                            <textarea name="comm_details" required="" rows="8" id='formcontent'
-                                class="form-control"></textarea>
-                        </div>
-                        <button type="submit" name="sbm" id="submitcomment" class="btn btn-primary">Gửi</button>
-                    </form>
-                </div>
-            </div>
+            
 
             <div class="product-comment row pb-4 pb-4  py-4 pb-4 py-4 py-4">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -545,7 +523,20 @@
                 </div>
             </div>
 
-
+            <div class="customer-reviews row pb-4 pb-4  py-4 pb-4 py-4 py-4">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3>Bình luận sản phẩm</h3>
+                    <form  action="upcmt.php" method="post">
+                        <input type="hidden" name="product_id" class="product_id"
+                            value="<?php echo $id ?>">
+                        <div class="form-group">
+                            <label>Nội dung:</label>
+                            <textarea name="content" required="" rows="8" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" name="themmoi" class="btn btn-primary">Gửi</button>
+                    </form>
+                </div>
+            </div>
 
 
 

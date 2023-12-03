@@ -90,7 +90,7 @@ function addToCart($idUser,$idProduct)
 
 }
 function getOrders(){
-    $sql ="SELECT oi.order_id,oi.name,oi.address,oi.phone, SUM(oi.quantity * sp.price) AS total_amount
+    $sql ="SELECT oi.order_id,oi.name,oi.address,oi.phone,oi.trangthai, SUM(oi.quantity * sp.price) AS total_amount
 FROM order_items oi
 JOIN sanpham sp ON oi.product_id = sp.id
 GROUP BY oi.order_id, oi.name,oi.address,oi.phone;
@@ -103,11 +103,10 @@ GROUP BY oi.order_id, oi.name,oi.address,oi.phone;
 
 
 function getUnplaced(){
-    $sql ="SELECT oi.user_id, SUM(oi.quantity * sp.price) AS total_amount
-FROM carts oi
+    $sql ="SELECT oi.order_id,oi.name,oi.address,oi.phone,oi.trangthai, SUM(oi.quantity * sp.price) AS total_amount
+FROM order_items oi
 JOIN sanpham sp ON oi.product_id = sp.id
-where oi.status = 1
-GROUP BY oi.user_id;
+GROUP BY oi.order_id, oi.name,oi.address,oi.phone;
 ";
     return pdo_query($sql);
 }

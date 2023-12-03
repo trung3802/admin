@@ -125,12 +125,23 @@ h2 {
                 }
             ?>
         </p>
+<form method="post" action="update_status.php" onsubmit="return confirmUpdate()">
+    <!-- Your existing select element -->
+    <select name="status" id="status">
+        <option value="1" <?php echo ($item['trangthai'] == 1) ? 'selected' : ''; ?>>Đang chờ giao hàng</option>
+        <option value="2" <?php echo ($item['trangthai'] == 2) ? 'selected' : ''; ?>>Đơn hàng đang giao</option>
+        <option value="3" <?php echo ($item['trangthai'] == 3) ? 'selected' : ''; ?>>Hoàn thành</option>
+    </select>
 
-        <select name="" id="">
-            <option value="1" <?php echo ($item['trangthai'] == 1) ? 'selected' : ''; ?>>Đang chờ</option>
-            <option value="2" <?php echo ($item['trangthai'] == 2) ? 'selected' : ''; ?>>Đang giao</option>
-            <option value="3" <?php echo ($item['trangthai'] == 3) ? 'selected' : ''; ?>>Hoàn thành</option>
-        </select>
+    <!-- Add a hidden input to pass the order ID -->
+    <input type="hidden" name="order_id" value="<?php echo $item['order_id']; ?>">
+
+    <!-- Add the Update button -->
+    <button type="submit" name="update_status">Update</button>
+</form>
+
+
+
         </div>
         <div>
             <h3>Chi Tiết Giỏ Hàng</h3>
@@ -149,6 +160,10 @@ h2 {
         </div>
     <?php endforeach; ?>
 </div>
-
+<script>
+    function confirmUpdate() {
+        return confirm('Bạn có chắc muốn cập nhật trạng thái?');
+    }
+</script>
 <input type="submit" style="width: 10%; height: 80px; color: red; margin-left: 80%;" value="Xác Nhận">
 
